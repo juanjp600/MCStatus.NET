@@ -1,10 +1,29 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>MCStatus.NET</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Salvage</Authors>
+    <Company></Company>
+    <Description>A minimal status checker library for Minecraft servers using the Server List Ping (SLP) interface in C#</Description>
+    <PackageRepositoryUrl>https://github.com/Saalvage/MCStatus.NET</PackageRepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>Zlib</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/Saalvage/MCStatus.NET</RepositoryUrl>
+    <PackageTags>minecraft;server;status</PackageTags>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>
