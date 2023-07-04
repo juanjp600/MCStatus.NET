@@ -30,7 +30,8 @@ internal static class StreamExtensions {
             await stream.WriteByteAsync((byte)((i & SEGMENT_BITS) | CONTINUE_BIT));
 
             // Note: >>> means that the sign bit is shifted with the rest of the number rather than being left alone
-            i >>>= 7;
+            // Reimplemented in terms of casts and long right shift because .NET 6 doesn't have unsigned right shift
+            i = (int)(((long)(uint)i) >> 7);
         }
     }
 
@@ -38,6 +39,12 @@ internal static class StreamExtensions {
         var bytes = Encoding.UTF8.GetBytes(str);
         await stream.WriteVarIntAsync(bytes.Length);
         await stream.WriteAsync(bytes);
+    }
+
+    public static async ValueTask ReadExactlyAsync(this Stream stream, byte[] bytes)
+    {
+        int readCount = await stream.ReadAsync(bytes);
+        if (readCount < bytes.Length) { throw new EndOfStreamException(); }
     }
 
     public static async ValueTask<long> ReadLongAsync(this Stream stream) {
